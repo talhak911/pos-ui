@@ -5,7 +5,7 @@ import { z } from 'zod';
 // ============================================================================
 
 // Basic Contact Information
-const BasicsPictureSchema = z.object({
+export const BasicsPictureSchema = z.object({
   url: z.string().url().optional(),
   size: z.number().min(20).max(200).default(64),
   aspectRatio: z.number().default(1),
@@ -13,7 +13,7 @@ const BasicsPictureSchema = z.object({
   opacity: z.number().min(0).max(1).default(1),
 });
 
-const BasicsSchema = z.object({
+export const BasicsSchema = z.object({
   name: z.string().default(''),
   label: z.string().default(''),
   email: z.string().email().optional(),
@@ -45,7 +45,7 @@ const ProfileSchema = z.object({
 });
 
 // Experience / Work History
-const ExperienceItemSchema = z.object({
+export const ExperienceItemSchema = z.object({
   id: z.string(),
   name: z.string().default(''),
   position: z.string().default(''),
@@ -55,9 +55,10 @@ const ExperienceItemSchema = z.object({
   highlights: z.array(z.string()).default([]),
   isWorkingHere: z.boolean().default(false),
   location: z.string().default(''),
+  visible: z.boolean().default(true),
 });
 
-const ExperienceSchema = z.object({
+export const ExperienceSchema = z.object({
   id: z.string(),
   visible: z.boolean().default(true),
   name: z.string().default('Experience'),
@@ -65,7 +66,7 @@ const ExperienceSchema = z.object({
 });
 
 // Education
-const EducationItemSchema = z.object({
+export const EducationItemSchema = z.object({
   id: z.string(),
   institution: z.string().default(''),
   studyType: z.string().default(''),
@@ -74,9 +75,10 @@ const EducationItemSchema = z.object({
   endDate: z.string().optional(),
   score: z.string().default(''),
   summary: z.string().default(''),
+  visible: z.boolean().default(true),
 });
 
-const EducationSchema = z.object({
+export const EducationSchema = z.object({
   id: z.string(),
   visible: z.boolean().default(true),
   name: z.string().default('Education'),
@@ -96,6 +98,7 @@ const ProjectItemSchema = z.object({
   roles: z.array(z.string()).default([]),
   entity: z.string().default(''),
   type: z.string().default(''),
+  visible: z.boolean().default(true),
 });
 
 const ProjectSchema = z.object({
@@ -106,14 +109,15 @@ const ProjectSchema = z.object({
 });
 
 // Skills
-const SkillItemSchema = z.object({
+export const SkillItemSchema = z.object({
   id: z.string(),
   name: z.string().default(''),
   level: z.enum(['Beginner', 'Intermediate', 'Advanced', 'Expert']).default('Intermediate'),
   keywords: z.array(z.string()).default([]),
+  visible: z.boolean().default(true),
 });
 
-const SkillSchema = z.object({
+export const SkillSchema = z.object({
   id: z.string(),
   visible: z.boolean().default(true),
   name: z.string().default('Skills'),
@@ -125,6 +129,7 @@ const LanguageItemSchema = z.object({
   id: z.string(),
   language: z.string().default(''),
   fluency: z.enum(['Elementary', 'Limited Working', 'Professional Working', 'Full Professional', 'Native Speaker']).default('Limited Working'),
+  visible: z.boolean().default(true),
 });
 
 const LanguageSchema = z.object({
@@ -250,7 +255,7 @@ const CustomSectionSchema = z.object({
 });
 
 // Design/Styling
-const DesignSchema = z.object({
+export const DesignSchema = z.object({
   primary: z.string().default('#000000'),
   background: z.string().default('#ffffff'),
   accent: z.string().default('#0066cc'),
@@ -287,7 +292,7 @@ const LayoutSchema = z.object({
 });
 
 // Metadata
-const MetadataSchema = z.object({
+export const MetadataSchema = z.object({
   template: z.string().default('modern'),
   layout: LayoutSchema.optional(),
   design: DesignSchema.optional(),

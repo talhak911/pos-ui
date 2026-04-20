@@ -66,7 +66,7 @@ export const useCreateResume = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (config: { name?: string; template?: 'default' | 'empty' }) => {
+    mutationFn: async (config: { name?: string; template?: 'default' | 'empty' } = {}) => {
       const resume = config.template === 'empty' 
         ? createEmptyResume(config.name) 
         : createDefaultResume(config.name);
@@ -114,9 +114,12 @@ export const useDuplicateResume = () => {
 
       const duplicate: ResumeData = {
         ...original,
-        id: Math.random().toString(36).substr(2, 9), // Simple UUID fallback
+        id: Math.random().toString(36).substring(2, 11),
         name: `${original.name} (Copy)`,
         metadata: {
+          template: "modern",
+          css: "",
+          notes: "",
           ...original.metadata,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString(),
